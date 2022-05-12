@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/WSCliente/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/WSCliente/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <xsd:element name="ConsultarClienteRequest">
+                <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="//%.14" schemaObject="/0/ConsultarClienteRequest;XSDElementDeclaration"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element maxOccurs="1" minOccurs="0" name="auditoria" type="tns:Auditoria"/>
+          	<xsd:element maxOccurs="1" minOccurs="1" name="dni" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ConsultarClienteResponse">
+                <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="//%.15" schemaObject="/0/ConsultarClienteResponse;XSDElementDeclaration=1"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element maxOccurs="1" minOccurs="0" name="nombre" type="xsd:string"/>
+          	<xsd:element maxOccurs="1" minOccurs="0" name="email" type="xsd:string">
+          	</xsd:element>
+          	<xsd:element maxOccurs="1" minOccurs="0" name="direccion" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="Auditoria">
+      	<xsd:sequence>
+      		<xsd:element maxOccurs="1" minOccurs="0" name="usuario" type="xsd:string"/>
+      		<xsd:element maxOccurs="1" minOccurs="0" name="dni" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>

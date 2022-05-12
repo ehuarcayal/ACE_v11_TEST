@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="com/bcp/MQ_Consultar.msgflow" nsPrefix="com_bcp_MQ_Consultar.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.filePath" name="filePath" defaultValueLiteral="/home/aceuser/ace-server/consulta.log">
+      <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="Property.destination" name="destination" lowerBound="1" eType="//%" defaultValueLiteral="file"/>
+    <translation xmi:type="utility:TranslatableString" key="MQ_Consultar" bundleName="com/bcp/MQ_Consultar" pluginId="APP_Cliente"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/APP_Cliente/icons/full/obj16/MQ_Consultar.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/APP_Cliente/icons/full/obj30/MQ_Consultar.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="586,352" pattern="[OUTPUT-MQ-AUDITORIA ] - [${CURRENT_TIMESTAMP} ]&#xA;--------------------------------------------------------------------------------------&#xA;Root = ${Root}&#xA;Env= ${Environment}&#xA;ExceptionList = ${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="T_OutputAudtoriaMQ"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="856,237">
+        <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="316,136" pattern="[ERROR-MQ ] - [${CURRENT_TIMESTAMP} ]&#xA;--------------------------------------------------------------------------------------&#xA;Root = ${Root}&#xA;Env= ${Environment}&#xA;ExceptionList = ${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="T_Error"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="459,239" dataSource="TESTDB" computeExpression="esql://routine/com.bcp#Consultar_execute_mq.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="execute"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="627,241" pattern="[OUTPUT-MQ ] - [${CURRENT_TIMESTAMP} ]&#xA;--------------------------------------------------------------------------------------&#xA;Root = ${Root}&#xA;Env= ${Environment}&#xA;ExceptionList = ${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="T_OutputWS"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="319,239" pattern="[INPUT-MQ ] - [${CURRENT_TIMESTAMP} ]&#xA;--------------------------------------------------------------------------------------&#xA;Root = ${Root}&#xA;Env= ${Environment}&#xA;ExceptionList = ${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="t_InputMQ"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="181,239" queueName="QUEUE.INPUT.CONSULTA" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="MQ Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="750,114" queueName="QUEUE.OUTPUT.CONSULTA">
+        <translation xmi:type="utility:ConstantString" string="QUEUE.OUTPUT.CONSULTA"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="825,350" queueName="QUEUE.TX.AUDITORIA">
+        <translation xmi:type="utility:ConstantString" string="QUEUE.TX.AUDITORIA"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="627,116" pattern="[OUTPUT-MQ-RESPUESTA ] - [${CURRENT_TIMESTAMP} ]&#xA;--------------------------------------------------------------------------------------&#xA;Root = ${Root}&#xA;Env= ${Environment}&#xA;ExceptionList = ${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="T_OutputMQ"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer>
+      <propertyDescriptor groupName="Group.Basic" configurable="true" describedAttribute="Property.filePath">
+        <propertyName xmi:type="utility:TranslatableString" key="Property.filePath" bundleName="ComIbmTrace" pluginId="com.ibm.etools.mft.ibmnodes.definitions"/>
+        <propertyDescriptor groupName="Group.Basic" describedAttribute="Property.destination">
+          <propertyName xmi:type="utility:TranslatableString" key="Property.destination" bundleName="ComIbmTrace" pluginId="com.ibm.etools.mft.ibmnodes.definitions"/>
+        </propertyDescriptor>
+      </propertyDescriptor>
+    </propertyOrganizer>
+    <attributeLinks promotedAttribute="Property.filePath" overriddenNodes="FCMComposite_1_3 FCMComposite_1_6 FCMComposite_1_1 FCMComposite_1_5 FCMComposite_1_7">
+      <overriddenAttribute href="ComIbmTrace.msgnode#Property.filePath"/>
+    </attributeLinks>
+    <attributeLinks promotedAttribute="Property.destination" overriddenNodes="FCMComposite_1_3 FCMComposite_1_6 FCMComposite_1_1 FCMComposite_1_5 FCMComposite_1_7">
+      <overriddenAttribute href="ComIbmTrace.msgnode#Property.destination"/>
+    </attributeLinks>
+    <stickyBoard/>
+  </eClassifiers>
+  <eClassifiers xmi:type="ecore:EEnum">
+    <eLiterals xmi:id="destination.none" name="none"/>
+    <eLiterals xmi:id="destination.userTrace" name="userTrace" value="1"/>
+    <eLiterals xmi:id="destination.file" name="file" value="2"/>
+    <eLiterals xmi:id="destination.localError" name="localError" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

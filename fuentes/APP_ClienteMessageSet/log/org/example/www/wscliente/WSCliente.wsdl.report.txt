@@ -1,0 +1,23 @@
+
+
+Importing file: /media/erickrog/DATOS/Programas/ACE/wrkBCPTest/WSDL/WSCliente.wsdl
+
+BIP0224W The message set has no XML Wire Format layer defined. Only the logical information will appear in the model.
+The WSDL import will proceed with bindings WSClienteSOAP.
+Creating wsdl schema document for file:///media/erickrog/DATOS/Programas/ACE/wrkBCPTest/WSDL/WSCliente.wsdl.
+Parsing wsdl binding {http://www.example.org/WSCliente/}WSClienteSOAP.
+Parsing wsdl binding input ConsultarCliente.
+Parsing wsdl binding output ConsultarCliente.
+Processing doc style for operation ConsultarCliente.
+Populating WSDL schema APP_ClienteMessageSet/org/example/www/wscliente/WSCliente.mxsd.
+Creating file APP_ClienteMessageSet/org/example/www/wscliente/WSCliente.mxsd in the workspace.
+Creating file APP_ClienteMessageSet/org/example/www/wscliente/WSCliente_InlineSchema1.mxsd in the workspace.
+Copying source WSDL WSCliente.wsdl to WSCliente.wsdl.
+
+Elapsed time processing this message definition file: 0.282 seconds
+Number of warnings for this message definition file: 1
+
+
+Number of files processed: 1
+
+

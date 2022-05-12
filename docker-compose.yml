@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+  acemqserver:
+    image: test_bcp
+    environment:
+      LICENSE: accept
+      MQ_QMGR_NAME: QMGR
+      ACE_SERVER_NAME: ACESERVER
+      USE_QMGR: "true"
+    ports:
+         - "7600:7600"
+         - "7800:7800"
+         - "7843:7843"
+         - "1414:1414"
+    restart: on-failure
+    volumes:
+     - ${PWD}/odbc.ini:/home/aceuser/initial-config/odbcini/odbc.ini
+     - ${PWD}/config.mqsc:/home/aceuser/initial-config/mqsc/config.mqsc
+     - ${PWD}/setdbparms.txt:/home/aceuser/initial-config/setdbparms/setdbparms.txt
+
+  postgresql:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    restart: on-failure

@@ -1,0 +1,45 @@
+BROKER SCHEMA com.bcp
+DECLARE ns NAMESPACE 'http://www.example.org/WSCliente/';
+
+CREATE COMPUTE MODULE Consultar_execute_ws
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE refInput REFERENCE TO InputRoot.SOAP.Body.ns:ConsultarClienteRequest;
+		DECLARE blbMsgID BLOB InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		
+		/* Obtenemos los datos de resquest */
+		DECLARE dniConsultar CHARACTER refInput.dni;
+		DECLARE usuario CHARACTER refInput.auditoria.usuario;
+		DECLARE dniUsuario CHARACTER refInput.auditoria.dni;
+		
+		/* Creamos Estructura para la cola */
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'MQMD';
+		DECLARE refOutputMQMD REFERENCE TO OutputRoot.MQMD;
+		SET refOutputMQMD.MsgId = blbMsgID;
+		SET refOutputMQMD.CorrelId = blbMsgID;
+		
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
+		DECLARE refOutput REFERENCE TO OutputRoot.XMLNSC;
+		SET refOutput.ConsultaRequest.dni = dniConsultar;
+		SET refOutput.ConsultaRequest.Auditoria.usuario = usuario;
+		SET refOutput.ConsultaRequest.Auditoria.dni = dniUsuario;
+		SET refOutput.ConsultaRequest.esSOAP = true;
+				
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

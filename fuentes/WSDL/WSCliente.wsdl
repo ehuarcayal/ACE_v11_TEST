@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="WSCliente" targetNamespace="http://www.example.org/WSCliente/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/WSCliente/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/WSCliente/">
+      <xsd:element name="ConsultarClienteRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="auditoria" type="tns:Auditoria"
+          		minOccurs="0" maxOccurs="1" />
+          	<xsd:element name="dni" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ConsultarClienteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="nombre" type="xsd:string" minOccurs="0"
+          		maxOccurs="1" />
+          	<xsd:element name="email" type="xsd:string" minOccurs="0"
+          		maxOccurs="1">
+          	</xsd:element>
+          	<xsd:element name="direccion" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="Auditoria">
+      	<xsd:sequence>
+      		<xsd:element name="usuario" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+      		<xsd:element name="dni" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultarClienteRequest">
+    <wsdl:part element="tns:ConsultarClienteRequest" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarClienteResponse">
+    <wsdl:part element="tns:ConsultarClienteResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="WSCliente">
+    <wsdl:operation name="ConsultarCliente">
+      <wsdl:input message="tns:ConsultarClienteRequest"/>
+      <wsdl:output message="tns:ConsultarClienteResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSClienteSOAP" type="tns:WSCliente">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ConsultarCliente">
+      <soap:operation soapAction="http://www.example.org/WSCliente/ConsultarCliente"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCliente">
+    <wsdl:port binding="tns:WSClienteSOAP" name="WSClienteSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
