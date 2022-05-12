@@ -10,9 +10,15 @@
 ```bash
 docker build -t test_bcp .
 ```
-4. Ejecutar el docker-compose: 
+3. Ejecutar el docker-compose: 
 ```bash
 docker-compose up -d
 ```
-## Prueba en:
-- http://localhost:7800/consulta?wsdl
+## Conexiones:
+- URL del Servicio: http://localhost:7800/consulta?wsdl
+- Server de Integracion: http://localhost:7600
+- Queue Manager: localhost:1414
+- Conexion a Base de Datos: localhost:5432 user:postgres pass:postgres
+
+## Pruebas realizadas en:
+Kubuntu 21.04
