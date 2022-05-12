@@ -19,6 +19,7 @@ docker-compose up -d
 - Server de Integracion: http://localhost:7600
 - Queue Manager: localhost:1414
 - Conexion a Base de Datos: localhost:5432 user:postgres pass:postgres
+- Proyecto Soap-ui: Consulta-TEST-BCP-soapui-project.xml 
 
 ## Pruebas realizadas en:
 Kubuntu 21.04
