@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="caaa5134-5b3c-473f-8a6b-6b335ac8a9d6" activeEnvironment="Default" name="Consulta_TEST_BCP" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="654fcc50-a2ea-4655-8a8a-e6a2599079fe" wsaVersion="NONE" name="WSClienteSOAP" type="wsdl" bindingName="{http://www.example.org/WSCliente/}WSClienteSOAP" soapVersion="1_1" anonymous="optional" definition="http://localhost:7800/consulta?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7800/consulta?wsdl"><con:part><con:url>http://localhost:7800/consulta?wsdl</con:url><con:content><![CDATA[<!--File APP_ClienteMessageSet/org/example/www/wscliente/WSCliente.wsdl, application APP_Cliente-->
+<wsdl:definitions name="WSCliente" targetNamespace="http://www.example.org/WSCliente/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/WSCliente/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="WSCliente_InlineSchema1.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="WSClienteSOAP" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/WSCliente/">
+      <xsd:include schemaLocation="http://localhost:7800/consulta?xsd=xsd0"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultarClienteRequest">
+    <wsdl:part element="tns:ConsultarClienteRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarClienteResponse">
+    <wsdl:part element="tns:ConsultarClienteResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="WSCliente">
+    <wsdl:operation name="ConsultarCliente">
+      <wsdl:input message="tns:ConsultarClienteRequest"/>
+      <wsdl:output message="tns:ConsultarClienteResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSClienteSOAP" type="tns:WSCliente">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ConsultarCliente">
+      <soap:operation soapAction="http://www.example.org/WSCliente/ConsultarCliente"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCliente">
+    <wsdl:port binding="tns:WSClienteSOAP" name="WSClienteSOAP">
+      <soap:address location="http://localhost:7800/consulta"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:7800/consulta?xsd=xsd0</con:url><con:content><![CDATA[<!--File APP_ClienteMessageSet/org/example/www/wscliente/WSCliente_InlineSchema1.xsd, application APP_Cliente-->
+<xsd:schema targetNamespace="http://www.example.org/WSCliente/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/WSCliente/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <xsd:element name="ConsultarClienteRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="1" minOccurs="0" name="auditoria" type="tns:Auditoria"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="dni" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ConsultarClienteResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="1" minOccurs="0" name="nombre" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="email" type="xsd:string"></xsd:element>
+        <xsd:element maxOccurs="1" minOccurs="0" name="direccion" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="Auditoria">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="usuario" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dni" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7800/consulta</con:endpoint></con:endpoints><con:operation id="92106585-dd96-4cf7-931a-72b87659e838" isOneWay="false" action="http://www.example.org/WSCliente/ConsultarCliente" name="ConsultarCliente" bindingOperationName="ConsultarCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bd40a9e6-f22d-46de-a0c8-f88a3d1aabbb" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/consulta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsc="http://www.example.org/WSCliente/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <wsc:ConsultarClienteRequest>
+         <!--Optional:-->
+         <auditoria>
+            <!--Optional:-->
+            <usuario>ERICK</usuario>
+            <!--Optional:-->
+            <dni>45235466</dni>
+         </auditoria>
+         <dni>45235466</dni>
+      </wsc:ConsultarClienteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.example.org/WSCliente/ConsultarCliente"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
