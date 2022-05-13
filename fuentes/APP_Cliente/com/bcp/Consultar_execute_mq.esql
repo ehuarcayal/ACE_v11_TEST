@@ -66,7 +66,7 @@ CREATE COMPUTE MODULE Consultar_execute_mq
 			SET OutputRoot.MQMD.CodedCharSetId = 1208;			
 
 			CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
-			DECLARE refOutput REFERENCE TO Environment.XMLNSC;
+			DECLARE refOutput REFERENCE TO OutputRoot.XMLNSC;
 			IF EXISTS ( Environment.RESULT[] ) THEN				
 				SET refOutput.ConsultarClienteResponse.nombre = Environment.RESULT.nombre;
 				SET refOutput.ConsultarClienteResponse.email = Environment.RESULT.email;
