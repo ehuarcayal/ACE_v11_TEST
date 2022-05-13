@@ -9,11 +9,11 @@ CREATE COMPUTE MODULE Consultar_execute_mq
 		DECLARE blbMsgId BLOB InputRoot.MQMD.CorrelId;
 		
 		DECLARE dniConsultar 		REFERENCE TO InputRoot.XMLNSC.ConsultaRequest.dni;
-		DECLARE dniAuditoria 		REFERENCE TO InputRoot.XMLNSC.ConsultaRequest.Auditoria.usuario;
-		DECLARE usuarioAuditoria 	REFERENCE TO InputRoot.XMLNSC.ConsultaRequest.Auditoria.dni;
+		DECLARE dniAuditoria 		REFERENCE TO InputRoot.XMLNSC.ConsultaRequest.Auditoria.dni;
+		DECLARE usuarioAuditoria 	REFERENCE TO InputRoot.XMLNSC.ConsultaRequest.Auditoria.usuario;
 		DECLARE esSOAP				BOOLEAN FALSE;
 		
-		IF EXISTS (InputRoot.XMLNSC.ConsultaRequest[]) THEN
+		IF EXISTS (InputRoot.XMLNSC.ConsultaRequest.esSOAP[]) THEN
 			SET esSOAP = TRUE;
 		END IF;
 		
@@ -57,8 +57,16 @@ CREATE COMPUTE MODULE Consultar_execute_mq
 			RETURN TRUE;
 		ELSE --Respuesta por MQ
 			
+			DECLARE iOptions INT BITOR(FolderBitStream, ValidateContent, ValidateValue);
+			DECLARE iCCSID INT InputRoot.Properties.CodedCharSetId; 
+			DECLARE iEncoding INT InputRoot.Properties.Encoding;
+			DECLARE blocbResponse BLOB;
+			
+			SET OutputRoot.Properties.CodedCharSetId = 1208;
+			SET OutputRoot.MQMD.CodedCharSetId = 1208;			
+
 			CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
-			DECLARE refOutput REFERENCE TO OutputRoot.XMLNSC;
+			DECLARE refOutput REFERENCE TO Environment.XMLNSC;
 			IF EXISTS ( Environment.RESULT[] ) THEN				
 				SET refOutput.ConsultarClienteResponse.nombre = Environment.RESULT.nombre;
 				SET refOutput.ConsultarClienteResponse.email = Environment.RESULT.email;
@@ -72,7 +80,7 @@ CREATE COMPUTE MODULE Consultar_execute_mq
 			PROPAGATE TO TERMINAL 2;
 		END IF;	
 		
-		RETURN TRUE;
+		RETURN FALSE;
 	END;
 
 	CREATE PROCEDURE CopyMessageHeaders() BEGIN

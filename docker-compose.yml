@@ -12,12 +12,12 @@ services:
          - "7800:7800"
          - "7843:7843"
          - "1414:1414"
+         - "9443:9443"
     restart: on-failure
     volumes:
      - ${PWD}/odbc.ini:/home/aceuser/initial-config/odbcini/odbc.ini
      - ${PWD}/config.mqsc:/home/aceuser/initial-config/mqsc/config.mqsc
      - ${PWD}/setdbparms.txt:/home/aceuser/initial-config/setdbparms/setdbparms.txt
-
   postgresql:
     image: postgres:14.1-alpine
     restart: always
