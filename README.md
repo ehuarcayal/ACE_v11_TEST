@@ -17,8 +17,10 @@ docker-compose up -d
 ## Conexiones:
 - URL del Servicio: http://localhost:7800/consulta?wsdl
 - Server de Integracion: http://localhost:7600
+- Queue Manager: https://localhost:9443/ibmmq/console/  credenciales: admin/passw0rd
 - Conexion a Base de Datos: localhost:5432 user:postgres pass:postgres
 - Proyecto Soap-ui: Consulta-TEST-BCP-soapui-project.xml 
+- MQ Payload: <ConsultaRequest><dni>12345678</dni><Auditoria><usuario>plopeze</usuario><dni>22334455</dni></Auditoria></ConsultaRequest>
 
 ## Pruebas realizadas en:
 Kubuntu 21.04
