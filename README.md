@@ -27,5 +27,3 @@ docker-compose up -d
 
 ## Pruebas realizadas en:
 Kubuntu 21.04
-
-
